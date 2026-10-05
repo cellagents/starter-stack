@@ -53,9 +53,19 @@ services:
       LITELLM_SALT_KEY: ${LITELLM_SALT_KEY:-sk-local-salt}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-    command: ["--config", "/litellm/config.yaml", "--port", "4000"]
+    # Mount the whole litellm/ directory so both config.yaml (gitignored,
+    # local) and config.example.yaml (tracked, template) are visible.
+    # Prefer config.yaml at runtime; fall back to the example so a fresh
+    # clone boots without any file-copy step.
+    entrypoint: ["sh", "-c"]
+    command:
+      - >
+        if [ -f /litellm/config.yaml ]; then CFG=/litellm/config.yaml;
+        else CFG=/litellm/config.example.yaml; fi;
+        echo "[litellm] using config: $$CFG";
+        exec litellm --config "$$CFG" --port 4000
     volumes:
-      - ./litellm/config.yaml:/litellm/config.yaml:ro
+      - ./litellm:/litellm:ro
       - litellm-data:/data
     ports:
       - "127.0.0.1:4001:4000"
