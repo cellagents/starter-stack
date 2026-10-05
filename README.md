@@ -17,9 +17,6 @@ instead. This repo is the localhost sibling.
 | harness     | <http://127.0.0.1:5000/panel>  | Reference harness and student panel              |
 | litellm     | <http://127.0.0.1:4001>        | Model gateway (internal; students never hit this) |
 
-A one-shot container builds the thin-client bundle into a shared
-volume mounted into the harness; it is not a long-running service.
-
 All ports bind to `127.0.0.1` only, so the stack does not leak to your
 LAN.
 
@@ -36,8 +33,9 @@ cp .env.example .env
 docker compose up --build
 ```
 
-First run takes a few minutes; it fetches four repos from GitHub and
-builds them. Later runs are faster unless you pass `--build`.
+First run takes a few minutes; it fetches three repos from GitHub and
+builds them, plus pulls the LiteLLM image. Later runs are faster
+unless you pass `--build`.
 
 When all services are healthy:
 
