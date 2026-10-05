@@ -1,6 +1,6 @@
 # starter-stack
 
-Run the full cell agents stack on your laptop. One `docker compose up`
+Run the full Cell agents stack on your laptop: one `docker compose up`
 builds every service from its upstream repo and wires them together.
 No DNS, no TLS, no servers.
 
