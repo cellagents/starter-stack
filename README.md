@@ -37,23 +37,6 @@ First run takes a few minutes; it fetches three repos from GitHub and
 builds them, plus pulls the LiteLLM image. Later runs are faster
 unless you pass `--build`.
 
-### Customizing the model list
-
-`litellm/config.example.yaml` is the shipped template. The LiteLLM
-container prefers `litellm/config.yaml` if it exists and falls back to
-the example otherwise, so a fresh clone boots without any file copy.
-To customize (add a model, change the budget cap, inline a provider
-key for a one-off experiment), copy and edit:
-
-```bash
-cp litellm/config.example.yaml litellm/config.yaml
-# edit litellm/config.yaml
-docker compose restart litellm
-```
-
-`litellm/config.yaml` is gitignored, so unredacted keys you paste in
-there won't follow you into a commit.
-
 When all services are healthy:
 
 - Open <http://127.0.0.1:5000/panel> to drive the agent through the

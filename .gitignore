@@ -1,5 +1,2 @@
 .env
 *.log
-# Local LiteLLM config may contain unredacted provider keys. The checked-in
-# config.example.yaml is the template; copy to config.yaml to customize.
-litellm/config.yaml
