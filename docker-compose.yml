@@ -53,6 +53,9 @@ services:
       LITELLM_SALT_KEY: ${LITELLM_SALT_KEY:-sk-local-salt}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      # No DB in this stack, so the admin UI at /ui can only render
+      # broken pages. 404 the whole surface.
+      DISABLE_ADMIN_UI: "True"
     command: ["--config", "/litellm/config.yaml", "--port", "4000"]
     volumes:
       - ./litellm/config.yaml:/litellm/config.yaml:ro
