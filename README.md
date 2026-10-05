@@ -51,7 +51,7 @@ To stop:
 docker compose down
 ```
 
-To wipe LiteLLM spend-tracking state and rebuilt images:
+To also drop named volumes:
 
 ```bash
 docker compose down -v
@@ -66,13 +66,6 @@ up upstream changes:
 docker compose pull        # pulls the LiteLLM image
 docker compose up --build  # rebuilds the app images from latest main
 ```
-
-## Spending guardrail
-
-LiteLLM is configured with `max_budget: 10` USD across all keys over a
-30-day window (see `litellm/config.yaml`). Hit it and the gateway
-stops serving. Raise it, lower it or remove it on your own machine as
-you please.
 
 ## Troubleshooting
 

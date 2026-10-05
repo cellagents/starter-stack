@@ -22,14 +22,11 @@ model_list:
 
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
-  database_type: null
-  disable_spend_logs: false
 
 litellm_settings:
-  # Keep a conservative cap so a runaway loop on your laptop can't rack
-  # up a surprise bill. Edit as needed.
-  max_budget: 10
-  budget_duration: 30d
+  # No DB-backed features here (no spend logs, no rolling budget cap)
+  # so LiteLLM runs standalone with no Postgres. Monitor spend on the
+  # provider dashboards; `docker compose down` is the kill switch.
   request_timeout: 20
   drop_params: true
   set_verbose: false
